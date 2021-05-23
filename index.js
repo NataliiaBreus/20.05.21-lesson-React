@@ -38,25 +38,29 @@ ReactDOM.render(reactElement, container);
 
 // создаем счетчик 
 
-class Counter extends React.Component{
-  constructor(props){
+class Counter extends React.Component {
+  constructor(props) {
     super(props);
+    this.state = {
+      counter: 0,
+    };
   }
-  decrement (){
-
+  increment = () => {
+    const {counter} = this.state;
+    this.setState({counter: counter + 1});
   }
-  increment(){
-
+  decrement = () => {
+    const {counter} = this.state;
+    this.setState({counter: counter - 1});
   }
-  render(){
+  render() {
     return React.createElement(
-      'div', 
-      null, 
-      React.createElement("button", {onClick:this.decrement}, '+'),
-      React.createElement("button", {onClick:this.increment}, '-') 
-    )
+      React.Fragment,
+      null,
+      React.createElement("h1", null, this.state.counter),
+      React.createElement("button", { onClick: this.decrement }, "-"),
+      React.createElement("button", { onClick: this.increment }, "+")
+    );
   }
-};
-
-ReactDOM.render(React.createElement(Counter, {counter:0}), container);
-
+}
+ReactDOM.render(React.createElement(Counter), container);
